@@ -59,7 +59,10 @@ def run_huggingface_implementation(args, _):
 
         # tailer the first several layers
         config.num_hidden_layers = args.num_layers
+        # Explicitly set rope_interleaved to True to use the interleaved rope implementation
+        config.rope_interleaved = True
         print(f"Modified config to use only {args.num_layers} layers")
+        print(f"Config of Deepseek: {config}")
 
     # Load the model from local path
     model = AutoModelForCausalLM.from_pretrained(
